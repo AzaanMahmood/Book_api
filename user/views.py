@@ -1,13 +1,13 @@
 from django.shortcuts import render
-from .serializers import  BookSerializer
-from .models import Book
+from .serializers import AuthorSerializer
+from .models import Author
 from rest_framework.generics import GenericAPIView
 from rest_framework.mixins import ListModelMixin,CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
 
 
-class BookListCreate(GenericAPIView, ListModelMixin, CreateModelMixin):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
+class AuthorListCreate(GenericAPIView, ListModelMixin, CreateModelMixin):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
 
     def get(self, request, *arg, **kwargs):
         return self.list(request, *arg, **kwargs)
@@ -15,9 +15,9 @@ class BookListCreate(GenericAPIView, ListModelMixin, CreateModelMixin):
     def post(self, request, *arg, **kwargs):
         return self.create(request, *arg, **kwargs)
 
-class BookRUD(GenericAPIView, UpdateModelMixin, RetrieveModelMixin, DestroyModelMixin):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
+class AuthorRUD(GenericAPIView, UpdateModelMixin, RetrieveModelMixin, DestroyModelMixin):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
 
     def get(self, request, *arg, **kwargs):
         return self.retrieve(request, *arg, **kwargs)
@@ -27,3 +27,4 @@ class BookRUD(GenericAPIView, UpdateModelMixin, RetrieveModelMixin, DestroyModel
 
     def delete(self, request, *arg, **kwargs):
         return self.destroy(request, *arg, **kwargs)
+    

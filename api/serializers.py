@@ -1,17 +1,10 @@
-from rest_framework import serializers
 from .models import Book
+from rest_framework import serializers
+from user.models import Author
 
-class BookSerializer(serializers.Serializer):
-    title = serializers.CharField(max_length=100)
-    author = serializers.CharField(max_length=100)
-    publication_date = serializers.DateField()
+class BookSerializer(serializers.ModelSerializer):
+    author_name = serializers.CharField(source='author.name', read_only=True)
+    class Meta:
+        model = Book
+        fields = ['id','title', 'author', 'publication_date', 'author_name']
 
-    def create(self, validated_data):
-        return Book.objects.create(**validated_data)
-    
-    def update(self, instance, validated_data):
-        instance.title = validated_data.get('title',instance.title)
-        instance.author = validated_data.get('author',instance.author)
-        instance.publication_date = validated_data.get('publication_date',instance.publication_date)
-        instance.save()
-        return instance
