@@ -1,7 +1,9 @@
+from django.contrib import admin
 from django.urls import path
-from . import views as b
+from api import views
+
 
 urlpatterns = [
-    path('books/', b.book_list),
-    path('books/<int:pk>/', b.book_detail),
+    path('',views.BookListCreate.as_view()),
+    path('<int:pk>/',views.BookRUD.as_view()),
 ]
