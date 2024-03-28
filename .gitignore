@@ -31,5 +31,4 @@ db.sqlite3
 # Ignore any other generated files or directories
 
 # Ignore migrations folder if you're using SQLite (replace 'api' with your app name if different)
-**/api/migrations/
-**/user/migrations/
+
