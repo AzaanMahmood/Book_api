@@ -3,4 +3,5 @@ from .models import Author
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
-    list_display =['id','name','gender']
+    list_display =['id','name','gender','is_active']
+
