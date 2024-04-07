@@ -8,12 +8,15 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 
 class BookListCreate(GenericAPIView, ListModelMixin, CreateModelMixin):
-    queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticated]
 
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['author']
+
+    def get_queryset(self):
+        return Book.objects.fil()
+    
 
     def get(self, request, *arg, **kwargs):
         return self.list(request, *arg, **kwargs)

@@ -7,9 +7,11 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class AuthorListCreate(GenericAPIView, ListModelMixin, CreateModelMixin):
-    queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Author.objects.filter(is_active=True)
 
     def get(self, request, *arg, **kwargs):
         return self.list(request, *arg, **kwargs)
